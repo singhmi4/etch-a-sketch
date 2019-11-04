@@ -1,12 +1,61 @@
 <!doctype html>
-<head>
+  <head>
 
-</head>
-<body>
-    
+  </head>
+  <style>
+    /* CSS Variables declaration */
+    :root {
+      --grid-rows: 1;
+      --grid-col: 1;
+    }
 
-</body>
-<script>
+    #container {
+      display: grid;
+      /* grid-gap: 1em; */
+      /* repeat() creates the number of rows and columns based on the css variable defined */
+      /* fr is fractional unit which means how much of the available space is taken up */
+      grid-template-rows: repeat(var(--grid-rows), 1fr); 
+      grid-template-columns: repeat(var(--grid-cols), 1fr);
+    }
 
-</script>
+    .grid-item {
+      padding: 1em;
+      border: 1px solid #ddd;
+      text-align:center;
+    }
+
+    .grid-item:hover {
+      background-color: black;
+    }
+
+  </style>
+  <body>
+    <div id="container">
+      
+
+    </div>
+
+  </body>
+  <script>
+    // Select container div which is to be the parent node
+    const container = document.querySelector('#container');
+
+    function makeGrid(rows, cols) {
+      // element.style.setProperty() method sets a new value for a CSS property
+      // --variable-name is custom property notation for CSS variables 
+      container.style.setProperty('--grid-rows', rows); // sets number of rows to value of rows
+      container.style.setProperty('--grid-cols', cols); // sets number of columns to value of cols
+      for (c = 0; c < (rows * cols); c++) {
+        let cell = document.createElement('div');
+        cell.innerText = (c + 1);
+        container.appendChild(cell).className = 'grid-item';
+      }
+    }
+
+    // Change background colour after hover effect
+
+
+    makeGrid(16,16);
+
+  </script>
 </html>
