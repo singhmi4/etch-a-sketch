@@ -24,10 +24,6 @@
       text-align:center;
     }
 
-    .grid-item:hover {
-      background-color: black;
-    }
-
   </style>
   <body>
     <div id="container">
@@ -47,15 +43,25 @@
       container.style.setProperty('--grid-cols', cols); // sets number of columns to value of cols
       for (c = 0; c < (rows * cols); c++) {
         let cell = document.createElement('div');
-        cell.innerText = (c + 1);
+        // cell.innerText = (c + 1);
         container.appendChild(cell).className = 'grid-item';
       }
     }
 
-    // Change background colour after hover effect
-
-
+    
     makeGrid(16,16);
+
+    // Select all grid items
+    const items = document.querySelectorAll('.grid-item');
+
+    // Change background colour after hover effect
+    items.forEach((item) => {
+      item.addEventListener("mouseleave", function(event) {
+        this.style.backgroundColor = "black";
+      });
+    });
+
+    
 
   </script>
 </html>
