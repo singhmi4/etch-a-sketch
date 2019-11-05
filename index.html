@@ -9,6 +9,11 @@
       --grid-col: 1;
     }
 
+    #top {
+      text-align: center;
+      margin: 1em;
+    }
+
     #container {
       display: grid;
       /* grid-gap: 1em; */
@@ -16,17 +21,25 @@
       /* fr is fractional unit which means how much of the available space is taken up */
       grid-template-rows: repeat(var(--grid-rows), 1fr); 
       grid-template-columns: repeat(var(--grid-cols), 1fr);
+      width: 960px;
+      margin: 0 auto;
     }
 
     .grid-item {
       padding: 1em;
-      border: 1px solid #ddd;
+      display: grid;
+      border: 1px solid black;
       text-align:center;
     }
 
   </style>
   <body>
+
+    <div id = "top">
+        <button>Reset the Grid with New Values</button>
+    </div>
     <div id="container">
+      
       
 
     </div>
@@ -48,18 +61,52 @@
       }
     }
 
-    
+    // Initialize web page with a 16 x 16 grid
     makeGrid(16,16);
 
     // Select all grid items
-    const items = document.querySelectorAll('.grid-item');
+    let items = document.querySelectorAll('.grid-item');
 
     // Change background colour after hover effect
     items.forEach((item) => {
-      item.addEventListener("mouseleave", function(event) {
+      item.addEventListener('mouseleave', function(event) {
         this.style.backgroundColor = "black";
       });
     });
+
+    // Reload Grid Function with user inputted values
+    const resetGrid = document.querySelector('button');
+
+    // When button is clicked
+    resetGrid.addEventListener('click', (event) => {
+
+      // ask the user to enter the grid dimension
+      let cellDim = prompt("How many rows and columns (one number) would you like for your new grid?");
+
+      // if user enters a positive number
+
+      // clear current grid
+      let child = container.lastElementChild;
+      while (child) {
+        container.removeChild(child);
+        child = container.lastElementChild;
+      }
+
+      // create new grid with user entered number
+      makeGrid(cellDim,cellDim);
+      
+      let items = document.querySelectorAll('.grid-item');
+      // Change background colour after hover effect
+      items.forEach((item) => {
+        item.addEventListener('mouseleave', function(event) {
+          this.style.backgroundColor = "black";
+        });
+      });
+
+    });
+
+
+
 
     
 
